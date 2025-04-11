@@ -1,0 +1,920 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Products - Guitar Shop</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #000;
+        }
+        
+        .navbar {
+            background-color: #000;
+            color: #fff;
+            padding: 1.5rem 3rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .navbar a {
+            color: #fff;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .navbar a:hover {
+            color: #ccc;
+        }
+        
+        .logo {
+            font-size: 1.6rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 3.5rem;
+        }
+        
+        .nav-links li {
+            position: relative;
+            font-weight: 500;
+        }
+        
+        .dropdown {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: #000;
+            min-width: 180px;
+            display: none;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+            border-radius: 4px;
+            margin-top: 10px;
+            padding: 8px 0;
+        }
+        
+        .dropdown li {
+            padding: 0.8rem 1.5rem;
+            width: 100%;
+            transition: background-color 0.2s ease;
+        }
+        
+        .dropdown li:hover {
+            background-color: #222;
+        }
+        
+        .sub-dropdown {
+            position: absolute;
+            left: 100%;
+            top: 0;
+            background-color: #000;
+            min-width: 180px;
+            display: none;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            border-radius: 4px;
+            margin-left: 2px;
+            padding: 8px 0;
+        }
+        
+        .has-dropdown:hover > .dropdown {
+            display: block;
+        }
+        
+        .has-sub-dropdown:hover > .sub-dropdown {
+            display: block;
+        }
+        
+        .right-section {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+        
+        .icon {
+            font-size: 1.3rem;
+            padding: 8px;
+            border-radius: 50%;
+            transition: background-color 0.3s ease;
+        }
+        
+        .icon:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        /* Product Page Styles */
+        .product-header {
+            text-align: center;
+            padding: 3rem 0;
+            background-color: #000;
+            color: #fff;
+        }
+
+        .product-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: #fff;
+        }
+
+        .product-header p {
+            font-size: 1.1rem;
+            color: #ccc;
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        .products-container {
+            width: 100%;
+            max-width: 100%;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+            display: block;
+            background-color: #000;
+        }
+        
+        .product-card-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .product-card {
+            background-color: #000;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 12px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .product-image {
+            height: 250px;
+            width: 100%;
+            background-color: #222;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            object-fit: cover;
+            overflow: hidden;
+        }
+
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .product-info {
+            padding: 1.5rem;
+        }
+
+        .product-info h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: #fff;
+        }
+
+        .product-info p {
+            font-size: 1rem;
+            color: #ccc;
+            margin-bottom: 1rem;
+        }
+
+        .price {
+            font-weight: 700;
+            font-size: 1.4rem;
+            color: #fff;
+            margin-bottom: 1.5rem;
+        }
+
+        .view-details {
+            padding: 8px 16px;
+            background-color: #000;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: background-color 0.3s;
+        }
+
+        .view-details:hover {
+            background-color: #333;
+        }
+
+        .button-group {
+            margin-top: 15px;
+            display: flex;
+            gap: 10px;
+        }
+
+        /* Modal styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 999;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+
+        .modal-content {
+            background-color: #000;
+            margin: 5% auto;
+            padding: 30px;
+            border: 2px solid #fff;
+            width: 80%;
+            max-width: 800px;
+            border-radius: 8px;
+            color: #fff;
+            position: relative;
+        }
+
+        .close-modal {
+            color: #fff;
+            position: absolute;
+            top: 15px;
+            right: 25px;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .close-modal:hover {
+            color: #ccc;
+        }
+
+        .modal-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+
+        .modal-image {
+            width: 100%;
+            height: 300px;
+            overflow: hidden;
+            border-radius: 8px;
+        }
+
+        .modal-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .modal-details h2 {
+            font-size: 2rem;
+            margin-bottom: 15px;
+        }
+
+        .modal-details .modal-price {
+            font-size: 1.8rem;
+            margin: 20px 0;
+            font-weight: 700;
+        }
+
+        .modal-description {
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .specifications {
+            margin-top: 20px;
+        }
+
+        .specifications h3 {
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+
+        .specifications ul {
+            list-style-type: none;
+        }
+
+        .specifications li {
+            padding: 5px 0;
+            border-bottom: 1px solid #333;
+        }
+
+        a {
+            text-decoration: none;
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">
+            <a href="index.html">Guitar Shop</a>
+        </div>
+        
+        <ul class="nav-links">
+            <li><a href="about.html">About</a></li>
+            <li><a href="contact.html">Contact</a></li>
+            <li class="has-dropdown">
+                <a href="product.html">Products</a>
+                <ul class="dropdown">
+                    <li><a href="acoustic.html">Acoustic</a></li>
+                    <li class="has-sub-dropdown">
+                        <a href="electric.html">Electric</a>
+                        <ul class="sub-dropdown">
+                            <li><a href="prs.html">PRS</a></li>
+                            <li><a href="gibson.html">Gibson</a></li>
+                            <li><a href="strandberg.html">Strandberg</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+        
+        <div class="right-section">
+            <a href="login.html" class="icon"><i class="fas fa-user"></i></a>
+        </div>
+    </nav>
+
+    <header class="product-header">
+        <h1>Our Products</h1>
+        <p>Discover the perfect guitar for your musical journey. From acoustic classics to electric powerhouses, find the instrument that inspires you.</p>
+    </header>
+
+    <div class="products-container">
+        <div class="product-card-container">
+            <!-- Acoustic Guitars -->
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="images/Acoustic_images/Taylor322e.jpeg" alt="Taylor 322e Acoustic Guitar">
+                </div>
+                <div class="product-info">
+                    <h3>Taylor 322e</h3>
+                    <p>Rich, warm tones with premium wood construction</p>
+                    <div class="price">₹263,868</div>
+                    <div class="button-group">
+                        <button class="view-details" onclick="openModal('taylor322e')">View Details</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="images/Acoustic_images/yamaha.jpeg" alt="Yamaha Acoustic Guitar">
+                </div>
+                <div class="product-info">
+                    <h3>Yamaha FG800</h3>
+                    <p>Solid spruce top with balanced tone and projection</p>
+                    <div class="price">₹79,068</div>
+                    <div class="button-group">
+                        <button class="view-details" onclick="openModal('yamahafg800')">View Details</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="images/Acoustic_images/saga.jpeg" alt="Saga Acoustic Guitar">
+                </div>
+                <div class="product-info">
+                    <h3>Saga Classic</h3>
+                    <p>Traditional design with bright, crisp sound</p>
+                    <div class="price">₹92,268</div>
+                    <div class="button-group">
+                        <button class="view-details" onclick="openModal('sagaclassic')">View Details</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Electric Guitars - PRS -->
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="images/Electric_images/Prs/prs_custom_24.jpeg" alt="PRS Custom 24 Guitar">
+                </div>
+                <div class="product-info">
+                    <h3>PRS Custom 24</h3>
+                    <p>Versatile electric with dual humbucker pickups</p>
+                    <div class="price">₹435,468</div>
+                    <div class="button-group">
+                        <button class="view-details" onclick="openModal('prscustom24')">View Details</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="images/Electric_images/Prs/Paul Reed Smith (PRS) Special Semi-Hollow - Fire Red Burst.jpeg" alt="PRS Semi-Hollow">
+                </div>
+                <div class="product-info">
+                    <h3>PRS Semi-Hollow</h3>
+                    <p>Fire Red Burst finish with semi-hollow design</p>
+                    <div class="price">₹382,668</div>
+                    <div class="button-group">
+                        <button class="view-details" onclick="openModal('prssemihollow')">View Details</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Electric Guitars - Gibson -->
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="images/Electric_images/Gibson/gibson_black.jpeg" alt="Gibson Les Paul">
+                </div>
+                <div class="product-info">
+                    <h3>Gibson Les Paul</h3>
+                    <p>Iconic design with unmatched sustain and tone</p>
+                    <div class="price">₹329,868</div>
+                    <div class="button-group">
+                        <button class="view-details" onclick="openModal('gibsonlespaul')">View Details</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="images/Electric_images/Gibson/Gibson SG.jpeg" alt="Gibson SG">
+                </div>
+                <div class="product-info">
+                    <h3>Gibson SG</h3>
+                    <p>Classic rock machine with aggressive tone</p>
+                    <div class="price">₹250,668</div>
+                    <div class="button-group">
+                        <button class="view-details" onclick="openModal('gibsonsg')">View Details</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="images/Electric_images/Gibson/Using a Gibson Les Paul for Jazz.jpeg" alt="Gibson Les Paul Jazz">
+                </div>
+                <div class="product-info">
+                    <h3>Gibson Les Paul Jazz</h3>
+                    <p>Warm jazz tones with classic Les Paul styling</p>
+                    <div class="price">₹289,868</div>
+                    <div class="button-group">
+                        <button class="view-details" onclick="openModal('gibsonlespaul-jazz')">View Details</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="images/Electric_images/Gibson/download (2).jpeg" alt="Gibson Custom Shop">
+                </div>
+                <div class="product-info">
+                    <h3>Gibson Custom Shop</h3>
+                    <p>Hand-crafted premium electric with custom finish</p>
+                    <div class="price">₹426,868</div>
+                    <div class="button-group">
+                        <button class="view-details" onclick="openModal('gibsoncustom')">View Details</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Electric Guitars - Strandberg -->
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="images/Electric_images/Standberg/standberg_wodenedition.jpeg" alt="Strandberg Boden">
+                </div>
+                <div class="product-info">
+                    <h3>Strandberg Boden</h3>
+                    <p>Ergonomic design with fanned frets and headless design</p>
+                    <div class="price">₹316,668</div>
+                    <div class="button-group">
+                        <button class="view-details" onclick="openModal('strandbergboden')">View Details</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="images/Electric_images/Standberg/Strandberg Guitar #36 (Allan Holdsworth).jpeg" alt="Strandberg Allan Holdsworth">
+                </div>
+                <div class="product-info">
+                    <h3>Strandberg Holdsworth</h3>
+                    <p>Signature model with innovative multi-scale design</p>
+                    <div class="price">₹422,268</div>
+                    <div class="button-group">
+                        <button class="view-details" onclick="openModal('strandbergholdsworth')">View Details</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="images/Electric_images/Standberg/_strandberg_ Boden 7, maple top production prototype_.jpeg" alt="Strandberg Boden 7">
+                </div>
+                <div class="product-info">
+                    <h3>Strandberg Boden 7</h3>
+                    <p>Seven-string extended range guitar with maple top</p>
+                    <div class="price">₹342,668</div>
+                    <div class="button-group">
+                        <button class="view-details" onclick="openModal('strandbergboden7')">View Details</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="images/Electric_images/Standberg/multi-scale True Temperament frets (Strandberg Guitars).jpeg" alt="Strandberg True Temperament">
+                </div>
+                <div class="product-info">
+                    <h3>Strandberg True Temperament</h3>
+                    <p>Multi-scale frets with perfect intonation across all positions</p>
+                    <div class="price">₹475,968</div>
+                    <div class="button-group">
+                        <button class="view-details" onclick="openModal('strandbergtt')">View Details</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Product Detail Modals -->
+    <div id="taylor322e" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal('taylor322e')">&times;</span>
+            <div class="modal-grid">
+                <div class="modal-image">
+                    <img src="images/Acoustic_images/Taylor322e.jpeg" alt="Taylor 322e Acoustic Guitar">
+                </div>
+                <div class="modal-details">
+                    <h2>Taylor 322e</h2>
+                    <div class="modal-description">
+                        Rich, warm tones with premium wood construction. The Taylor 322e features a mahogany top, sapele back and sides, and Expression System 2 electronics for a natural acoustic sound.
+                    </div>
+                    <div class="modal-price">₹263,868</div>
+                    <div class="specifications">
+                        <h3>Specifications:</h3>
+                        <ul>
+                            <li>Body Shape: Grand Concert</li>
+                            <li>Top Wood: Mahogany</li>
+                            <li>Back/Sides: Sapele</li>
+                            <li>Neck: Mahogany</li>
+                            <li>Fretboard: Ebony</li>
+                            <li>Electronics: Expression System 2</li>
+                            <li>Case: Deluxe Hardshell</li>
+                        </ul>
+                    </div>
+                    <button class="view-details" style="margin-top: 20px;">View Details</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="prscustom24" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal('prscustom24')">&times;</span>
+            <div class="modal-grid">
+                <div class="modal-image">
+                    <img src="images/Electric_images/Prs/prs_custom_24.jpeg" alt="PRS Custom 24 Guitar">
+                </div>
+                <div class="modal-details">
+                    <h2>PRS Custom 24</h2>
+                    <div class="modal-description">
+                        The Custom 24 is PRS's flagship model, combining the best features of modern and vintage instrument design. Known for its versatility, it delivers everything from sweet cleans to aggressive distortion.
+                    </div>
+                    <div class="modal-price">₹435,468</div>
+                    <div class="specifications">
+                        <h3>Specifications:</h3>
+                        <ul>
+                            <li>Body: Maple top with mahogany back</li>
+                            <li>Neck: Mahogany, Pattern Thin carve</li>
+                            <li>Fretboard: Rosewood, 24 frets</li>
+                            <li>Scale Length: 25"</li>
+                            <li>Pickups: 85/15 treble and bass</li>
+                            <li>Hardware: PRS patented tremolo</li>
+                            <li>Finish: High-gloss nitrocellulose</li>
+                        </ul>
+                    </div>
+                    <button class="view-details" style="margin-top: 20px;">View Details</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="gibsonlespaul" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal('gibsonlespaul')">&times;</span>
+            <div class="modal-grid">
+                <div class="modal-image">
+                    <img src="images/Electric_images/Gibson/gibson_black.jpeg" alt="Gibson Les Paul">
+                </div>
+                <div class="modal-details">
+                    <h2>Gibson Les Paul</h2>
+                    <div class="modal-description">
+                        The iconic Gibson Les Paul features the classic combination of a mahogany body with a maple top, delivering the legendary Les Paul tone with incredible sustain and rich harmonics.
+                    </div>
+                    <div class="modal-price">₹329,868</div>
+                    <div class="specifications">
+                        <h3>Specifications:</h3>
+                        <ul>
+                            <li>Body: Mahogany with maple top</li>
+                            <li>Neck: Mahogany, '50s vintage profile</li>
+                            <li>Fretboard: Rosewood, 22 frets</li>
+                            <li>Scale Length: 24.75"</li>
+                            <li>Pickups: BurstBucker Pro humbuckers</li>
+                            <li>Hardware: Tune-O-Matic bridge</li>
+                            <li>Finish: Nitrocellulose lacquer</li>
+                        </ul>
+                    </div>
+                    <button class="view-details" style="margin-top: 20px;">View Details</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="strandbergboden" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal('strandbergboden')">&times;</span>
+            <div class="modal-grid">
+                <div class="modal-image">
+                    <img src="images/Electric_images/Standberg/standberg_wodenedition.jpeg" alt="Strandberg Boden">
+                </div>
+                <div class="modal-details">
+                    <h2>Strandberg Boden</h2>
+                    <div class="modal-description">
+                        The Strandberg Boden combines innovative ergonomic design with cutting-edge materials. Features include the patented EndurNeck profile, headless design, and lightweight chambered body.
+                    </div>
+                    <div class="modal-price">₹316,668</div>
+                    <div class="specifications">
+                        <h3>Specifications:</h3>
+                        <ul>
+                            <li>Body: Chambered Swamp Ash with Maple top</li>
+                            <li>Neck: Maple/Walnut with EndurNeck profile</li>
+                            <li>Fretboard: Richlite, fanned frets</li>
+                            <li>Scale Length: Multi-scale 25"-25.5"</li>
+                            <li>Pickups: Suhr SSH+ and SSV</li>
+                            <li>Hardware: EGS Rev 7 tremolo, headless</li>
+                            <li>Weight: Approx. 2.3kg (5lbs)</li>
+                        </ul>
+                    </div>
+                    <button class="view-details" style="margin-top: 20px;">View Details</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="prssemihollow" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal('prssemihollow')">&times;</span>
+            <div class="modal-grid">
+                <div class="modal-image">
+                    <img src="images/Electric_images/Prs/Paul Reed Smith (PRS) Special Semi-Hollow - Fire Red Burst.jpeg" alt="PRS Semi-Hollow">
+                </div>
+                <div class="modal-details">
+                    <h2>PRS Semi-Hollow</h2>
+                    <div class="modal-description">
+                        The PRS Semi-Hollow combines the classic PRS tone with the versatility of a semi-hollow body. Features include a mahogany body with a maple top, two PRS humbuckers, and a 5-way switch.
+                    </div>
+                    <div class="modal-price">₹382,668</div>
+                    <div class="specifications">
+                        <h3>Specifications:</h3>
+                        <ul>
+                            <li>Body: Mahogany with maple top</li>
+                            <li>Neck: Mahogany, '50s vintage profile</li>
+                            <li>Fretboard: Rosewood, 22 frets</li>
+                            <li>Scale Length: 24.75"</li>
+                            <li>Pickups: PRS humbuckers</li>
+                            <li>Hardware: Tune-O-Matic bridge</li>
+                            <li>Finish: Nitrocellulose lacquer</li>
+                        </ul>
+                    </div>
+                    <button class="view-details" style="margin-top: 20px;">View Details</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="gibsonsg" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal('gibsonsg')">&times;</span>
+            <div class="modal-grid">
+                <div class="modal-image">
+                    <img src="images/Electric_images/Gibson/Gibson SG.jpeg" alt="Gibson SG">
+                </div>
+                <div class="modal-details">
+                    <h2>Gibson SG</h2>
+                    <div class="modal-description">
+                        The Gibson SG is a powerful electric guitar known for its aggressive tone and iconic design. Features include a mahogany body with a maple top, two humbuckers, and a stopbar tailpiece.
+                    </div>
+                    <div class="modal-price">₹250,668</div>
+                    <div class="specifications">
+                        <h3>Specifications:</h3>
+                        <ul>
+                            <li>Body: Mahogany with maple top</li>
+                            <li>Neck: Mahogany, '50s vintage profile</li>
+                            <li>Fretboard: Rosewood, 22 frets</li>
+                            <li>Scale Length: 24.75"</li>
+                            <li>Pickups: Gibson humbuckers</li>
+                            <li>Hardware: Tune-O-Matic bridge</li>
+                            <li>Finish: Nitrocellulose lacquer</li>
+                        </ul>
+                    </div>
+                    <button class="view-details" style="margin-top: 20px;">View Details</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="gibsonlespaul-jazz" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal('gibsonlespaul-jazz')">&times;</span>
+            <div class="modal-grid">
+                <div class="modal-image">
+                    <img src="images/Electric_images/Gibson/Using a Gibson Les Paul for Jazz.jpeg" alt="Gibson Les Paul Jazz">
+                </div>
+                <div class="modal-details">
+                    <h2>Gibson Les Paul Jazz</h2>
+                    <div class="modal-description">
+                        The Gibson Les Paul Jazz combines the classic Les Paul tone with warm jazz tones. Features include a mahogany body with a maple top, two single-coil pickups, and a 5-way switch.
+                    </div>
+                    <div class="modal-price">₹289,868</div>
+                    <div class="specifications">
+                        <h3>Specifications:</h3>
+                        <ul>
+                            <li>Body: Mahogany with maple top</li>
+                            <li>Neck: Mahogany, '50s vintage profile</li>
+                            <li>Fretboard: Rosewood, 22 frets</li>
+                            <li>Scale Length: 24.75"</li>
+                            <li>Pickups: Gibson humbuckers</li>
+                            <li>Hardware: Tune-O-Matic bridge</li>
+                            <li>Finish: Nitrocellulose lacquer</li>
+                        </ul>
+                    </div>
+                    <button class="view-details" style="margin-top: 20px;">View Details</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="gibsoncustom" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal('gibsoncustom')">&times;</span>
+            <div class="modal-grid">
+                <div class="modal-image">
+                    <img src="images/Electric_images/Gibson/download (2).jpeg" alt="Gibson Custom Shop">
+                </div>
+                <div class="modal-details">
+                    <h2>Gibson Custom Shop</h2>
+                    <div class="modal-description">
+                        The Gibson Custom Shop combines traditional craftsmanship with modern design. Features include a mahogany body with a maple top, two custom pickups, and a 5-way switch.
+                    </div>
+                    <div class="modal-price">₹426,868</div>
+                    <div class="specifications">
+                        <h3>Specifications:</h3>
+                        <ul>
+                            <li>Body: Mahogany with maple top</li>
+                            <li>Neck: Mahogany, '50s vintage profile</li>
+                            <li>Fretboard: Rosewood, 22 frets</li>
+                            <li>Scale Length: 24.75"</li>
+                            <li>Pickups: Custom humbuckers</li>
+                            <li>Hardware: Tune-O-Matic bridge</li>
+                            <li>Finish: Nitrocellulose lacquer</li>
+                        </ul>
+                    </div>
+                    <button class="view-details" style="margin-top: 20px;">View Details</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="strandbergboden7" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal('strandbergboden7')">&times;</span>
+            <div class="modal-grid">
+                <div class="modal-image">
+                    <img src="images/Electric_images/Standberg/_strandberg_ Boden 7, maple top production prototype_.jpeg" alt="Strandberg Boden 7">
+                </div>
+                <div class="modal-details">
+                    <h2>Strandberg Boden 7</h2>
+                    <div class="modal-description">
+                        The Strandberg Boden 7 is a seven-string extended range guitar with a maple top. Features include a mahogany body, maple neck, and fanned frets for a wide range of sounds.
+                    </div>
+                    <div class="modal-price">₹342,668</div>
+                    <div class="specifications">
+                        <h3>Specifications:</h3>
+                        <ul>
+                            <li>Body: Mahogany with maple top</li>
+                            <li>Neck: Maple, fanned frets</li>
+                            <li>Fretboard: Richlite, 27 frets</li>
+                            <li>Scale Length: 25.5"</li>
+                            <li>Pickups: Suhr SSH+ and SSV</li>
+                            <li>Hardware: EGS Rev 7 tremolo</li>
+                            <li>Weight: Approx. 2.5kg (5.5lbs)</li>
+                        </ul>
+                    </div>
+                    <button class="view-details" style="margin-top: 20px;">View Details</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="strandbergholdsworth" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal('strandbergholdsworth')">&times;</span>
+            <div class="modal-grid">
+                <div class="modal-image">
+                    <img src="images/Electric_images/Standberg/Strandberg Guitar #36 (Allan Holdsworth).jpeg" alt="Strandberg Allan Holdsworth">
+                </div>
+                <div class="modal-details">
+                    <h2>Strandberg Holdsworth</h2>
+                    <div class="modal-description">
+                        The Strandberg Holdsworth is a signature model with innovative multi-scale design. Features include a mahogany body with a maple top, fanned frets, and a 5-way switch.
+                    </div>
+                    <div class="modal-price">₹422,268</div>
+                    <div class="specifications">
+                        <h3>Specifications:</h3>
+                        <ul>
+                            <li>Body: Mahogany with maple top</li>
+                            <li>Neck: Maple, fanned frets</li>
+                            <li>Fretboard: Rosewood, 22 frets</li>
+                            <li>Scale Length: 24.75"</li>
+                            <li>Pickups: Suhr SSH+ and SSV</li>
+                            <li>Hardware: Tune-O-Matic bridge</li>
+                            <li>Finish: Nitrocellulose lacquer</li>
+                        </ul>
+                    </div>
+                    <button class="view-details" style="margin-top: 20px;">View Details</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="strandbergtt" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal('strandbergtt')">&times;</span>
+            <div class="modal-grid">
+                <div class="modal-image">
+                    <img src="images/Electric_images/Standberg/multi-scale True Temperament frets (Strandberg Guitars).jpeg" alt="Strandberg True Temperament">
+                </div>
+                <div class="modal-details">
+                    <h2>Strandberg True Temperament</h2>
+                    <div class="modal-description">
+                        The Strandberg True Temperament is a multi-scale frets guitar with perfect intonation across all positions. Features include a mahogany body with a maple top, fanned frets, and a 5-way switch.
+                    </div>
+                    <div class="modal-price">₹475,968</div>
+                    <div class="specifications">
+                        <h3>Specifications:</h3>
+                        <ul>
+                            <li>Body: Mahogany with maple top</li>
+                            <li>Neck: Maple, fanned frets</li>
+                            <li>Fretboard: Rosewood, 22 frets</li>
+                            <li>Scale Length: 24.75"</li>
+                            <li>Pickups: Suhr SSH+ and SSV</li>
+                            <li>Hardware: Tune-O-Matic bridge</li>
+                            <li>Finish: Nitrocellulose lacquer</li>
+                        </ul>
+                    </div>
+                    <button class="view-details" style="margin-top: 20px;">View Details</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function openModal(modalId) {
+            document.getElementById(modalId).style.display = "block";
+            document.body.style.overflow = "hidden";
+        }
+        
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = "none";
+            document.body.style.overflow = "auto";
+        }
+        
+        // Close modal when clicking outside of it
+        window.onclick = function(event) {
+            if (event.target.classList.contains('modal')) {
+                event.target.style.display = "none";
+                document.body.style.overflow = "auto";
+            }
+        }
+    </script>
+</body>
+</html> 
