@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guitar Shop</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #f5f5f5;
+        }
+        
+        /* Combined header section */
+        .header-section {
+            background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url('images/background.jpg');
+            background-size: cover;
+            background-position: center;
+            color: #fff;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .navbar {
+            padding: 1.5rem 3rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+            background-color: transparent;
+            color: #fff;
+            z-index: 100;
+        }
+        
+        .navbar a {
+            color: #fff;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .navbar a:hover {
+            color: #ccc;
+        }
+        
+        .logo {
+            font-size: 1.6rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 3.5rem;
+        }
+        
+        .nav-links li {
+            position: relative;
+            font-weight: 500;
+        }
+        
+        .dropdown {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: #000;
+            min-width: 180px;
+            display: none;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+            border-radius: 4px;
+            margin-top: 10px;
+            padding: 8px 0;
+        }
+        
+        .dropdown li {
+            padding: 0.8rem 1.5rem;
+            width: 100%;
+            transition: background-color 0.2s ease;
+        }
+        
+        .dropdown li:hover {
+            background-color: #222;
+        }
+        
+        .sub-dropdown {
+            position: absolute;
+            left: 100%;
+            top: 0;
+            background-color: #000;
+            min-width: 180px;
+            display: none;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            border-radius: 4px;
+            margin-left: 2px;
+            padding: 8px 0;
+        }
+        
+        .has-dropdown:hover > .dropdown {
+            display: block;
+        }
+        
+        .has-sub-dropdown:hover > .sub-dropdown {
+            display: block;
+        }
+        
+        .right-section {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+        
+        .icon {
+            font-size: 1.3rem;
+            padding: 8px;
+            border-radius: 50%;
+            transition: background-color 0.3s ease;
+        }
+        
+        .icon:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        /* Hero Section Styles */
+        .hero {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 20px;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .hero p {
+            font-size: 1.4rem;
+            max-width: 800px;
+            margin-bottom: 2.5rem;
+            line-height: 1.6;
+            font-weight: 400;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+        }
+
+        .shop-btn {
+            display: inline-block;
+            background-color: transparent;
+            color: #fff;
+            font-size: 1.1rem;
+            font-weight: 600;
+            padding: 1rem 2.5rem;
+            border: 2px solid #fff;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            letter-spacing: 1px;
+        }
+
+        .shop-btn:hover {
+            background-color: #fff;
+            color: #000;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        a {
+            text-decoration: none;
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="header-section">
+        <nav class="navbar">
+            <div class="logo">
+                <a href="#">Guitar Shop</a>
+            </div>
+            
+            <ul class="nav-links">
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li class="has-dropdown">
+                    <a href="product.html">Products</a>
+                    <ul class="dropdown">
+                        <li><a href="acoustic.html">Acoustic</a></li>
+                        <li class="has-sub-dropdown">
+                            <a href="electric.html">Electric</a>
+                            <ul class="sub-dropdown">
+                                <li><a href="prs.html">PRS</a></li>
+                                <li><a href="gibson.html">Gibson</a></li>
+                                <li><a href="strandberg.html">Strandberg</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+            
+            <div class="right-section">
+                <a href="login.html" class="icon"><i class="fas fa-user"></i></a>
+            </div>
+        </nav>
+
+        <section class="hero">
+            <h1>FIND YOUR PERFECT SOUND</h1>
+            <p>"Music gives a soul to the universe, wings to the mind, flight to the imagination, and life to everything." — Plato</p>
+            <a href="product.html" class="shop-btn">SHOP NOW</a>
+        </section>
+    </div>
+
+    <!-- Main Content Section -->
+    <main class="main-content">
+        <!-- Featured Products Section -->
+        <section class="featured-section">
+            <div class="container">
+                <div class="featured-item">
+                    <div class="feature-content">
+                        <h3>Crafted for Expression. Designed to Inspire.</h3>
+                        <h2>Plini Edition Mirage</h2>
+                        <a href="#" class="cta-button">PREORDER NOW</a>
+                    </div>
+                    <div class="feature-image">
+                        <img src="images/Electric_images/Standberg/standberg_wodenedition.jpeg" alt="Plini Edition Guitar">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Secondary Featured Section -->
+        <section class="secondary-featured">
+            <div class="container">
+                <div class="featured-item reverse">
+                    <div class="feature-content">
+                        <h3>Stay Excited</h3>
+                        <h2>BODEN ESSENTIAL</h2>
+                        <a href="#" class="cta-button">SHOP NOW</a>
+                    </div>
+                    <div class="feature-image">
+                        <img src="images/Electric_images/Standberg/_strandberg_ Boden 7, maple top production prototype_.jpeg" alt="Boden Essential Guitar">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Guitar Anatomy Section -->
+        <section class="guitar-anatomy">
+            <div class="container">
+                <h2>Our anatomy</h2>
+                <p>We sell guitar that give completely new experience. We sells <em>headless guitars</em> as opposed to guitars without a headstock.</p>
+                
+                <div class="features-grid">
+                    <div class="feature">
+                        <h3>Versatile body shape</h3>
+                    </div>
+                    <div class="feature">
+                        <h3>Patented neck profile</h3>
+                    </div>
+                    <div class="feature">
+                        <h3>Headless</h3>
+                    </div>
+                    <div class="feature">
+                        <h3>SCALE LENGTHS ADAPTED TO YOU</h3>
+                    </div>
+                    <div class="feature">
+                        <h3>SPACE AGE MATERIALS</h3>
+                    </div>
+                    <div class="feature">
+                        <h3>PROPRIETARY HARDWARE</h3>
+                    </div>
+                </div>
+                <a href="#" class="read-more">Read More</a>
+            </div>
+        </section>
+
+        <!-- Collections Section -->
+        <section class="collections">
+            <div class="container">
+                <div class="collection-grid">
+                    <div class="collection-item">
+                        <img src="images/Electric_images/Standberg/Strandberg Guitar #36 (Allan Holdsworth).jpeg" alt="J Artisan">
+                        <h3>A true work of art</h3>
+                        <h2>J Artisan</h2>
+                        <a href="#">Read more</a>
+                    </div>
+                    <div class="collection-item">
+                        <img src="images/Electric_images/Gibson/gibson_black.jpeg" alt="Full Collection">
+                        <h3>Our Collection</h3>
+                        <h2>Guitars</h2>
+                    </div>
+                    <div class="collection-item">
+                        <img src="images/Electric_images/Prs/prs_custom_24.jpeg" alt="Artist Signature Models">
+                        <h3>Plini on stage with his signature guitar</h3>
+                        <h2>Artist Signature Models</h2>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <!-- Contact Section -->
+                <div class="footer-column">
+                    <h4>Contact Us</h4>
+                    <p>+977 9765432345</p>
+                    <p>support@guitarshop.com</p>
+                </div>
+
+                <!-- Customer Service -->
+                <div class="footer-column">
+                    <h4>Customer Service</h4>
+                    <ul>
+                        <li><a href="#">Contact Us</a></li>
+                        <li><a href="#">Ordering & Payment</a></li>
+                        <li><a href="#">Shipping</a></li>
+                    </ul>
+                </div>
+
+                <!-- Information -->
+                <div class="footer-column">
+                    <h4>Information</h4>
+                    <ul>
+                        <li><a href="#">About Guitar Shop</a></li>
+                        <li><a href="#">Media</a></li>
+                        <li><a href="#">Work With Us</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                    </ul>
+                </div>
+
+                <!-- Newsletter -->
+                <div class="footer-column newsletter">
+                    <h4>Subscribe to Newsletter</h4>
+                    <p>Ensure that you are up-to-date with news and developments</p>
+                    <form class="newsletter-form">
+                        <input type="email" placeholder="Your email address">
+                        <button type="submit">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Social Media Section -->
+            <div class="social-section">
+                <h4>Follow us</h4>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+
+            <!-- Copyright Section -->
+            <div class="copyright">
+                <p>&copy; 2024 Guitar Shop. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <style>
+        /* Main Content Styles */
+        .main-content {
+            background-color: #fff;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Featured Sections */
+        .featured-section, .secondary-featured {
+            padding: 80px 0;
+            background-color: #f9f9f9;
+        }
+
+        .featured-item {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+        }
+
+        .featured-item.reverse {
+            flex-direction: row-reverse;
+        }
+
+        .feature-content {
+            flex: 1;
+        }
+
+        .feature-image {
+            flex: 1;
+            text-align: center;
+        }
+
+        .feature-image img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+
+        .feature-content h3 {
+            font-size: 1.2rem;
+            color: #666;
+            margin-bottom: 10px;
+        }
+
+        .feature-content h2 {
+            font-size: 2.5rem;
+            margin-bottom: 25px;
+            font-weight: 700;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background-color: #000;
+            color: #fff;
+            padding: 12px 30px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .cta-button:hover {
+            background-color: #333;
+            transform: translateY(-3px);
+        }
+
+        /* Guitar Anatomy Section */
+        .guitar-anatomy {
+            padding: 100px 0;
+            text-align: center;
+            background-color: #f5f5f5;
+        }
+
+        .guitar-anatomy h2 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+
+        .guitar-anatomy p {
+            font-size: 1.1rem;
+            max-width: 800px;
+            margin: 0 auto 40px;
+            color: #555;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .feature {
+            padding: 30px;
+            border: 1px solid #eee;
+            background-color: #fff;
+            transition: transform 0.3s ease;
+        }
+
+        .feature:hover {
+            transform: translateY(-10px);
+        }
+
+        .feature h3 {
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        .read-more {
+            display: inline-block;
+            padding: 12px 30px;
+            background-color: transparent;
+            border: 2px solid #000;
+            color: #000;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .read-more:hover {
+            background-color: #000;
+            color: #fff;
+        }
+
+        /* Collections Section */
+        .collections {
+            padding: 80px 0;
+        }
+
+        .collection-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        .collection-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 8px;
+            transition: transform 0.3s ease;
+        }
+
+        .collection-item:hover {
+            transform: translateY(-10px);
+        }
+
+        .collection-item img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+        }
+
+        .collection-item h3 {
+            font-size: 0.9rem;
+            color: #666;
+            margin: 15px 0 5px;
+        }
+
+        .collection-item h2 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+
+        .collection-item a {
+            color: #000;
+            font-weight: 600;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .collection-item a:hover {
+            color: #555;
+        }
+
+        /* Footer Styles */
+        .footer {
+            background-color: #111;
+            color: #fff;
+            padding: 80px 0 40px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 40px;
+            margin-bottom: 60px;
+        }
+
+        .footer-column h4 {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-column h4:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 2px;
+            background-color: #555;
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 15px;
+        }
+
+        .footer-column a {
+            color: #ccc;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-column a:hover {
+            color: #fff;
+        }
+
+        .newsletter p {
+            margin-bottom: 20px;
+            color: #aaa;
+            font-size: 0.9rem;
+        }
+
+        .newsletter-form {
+            display: flex;
+            margin-bottom: 20px;
+        }
+
+        .newsletter-form input {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            background-color: #222;
+            color: #fff;
+        }
+
+        .newsletter-form button {
+            padding: 12px 20px;
+            background-color: #555;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .newsletter-form button:hover {
+            background-color: #777;
+        }
+
+        .social-section {
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        .social-section h4 {
+            margin-bottom: 20px;
+        }
+
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .social-icons a {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background-color: #222;
+            color: #fff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .social-icons a:hover {
+            background-color: #555;
+            transform: translateY(-3px);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid #333;
+            color: #aaa;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 992px) {
+            .footer-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .collection-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .features-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .featured-item, .featured-item.reverse {
+                flex-direction: column;
+            }
+            
+            .collection-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</body>
+</html> 
