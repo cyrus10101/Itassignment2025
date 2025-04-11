@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Electric Guitars - Guitar Shop</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+        }
+        
+        .header-section {
+            background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url('images/background.jpg');
+            background-size: cover;
+            background-position: center;
+            color: #fff;
+            padding-bottom: 60px;
+        }
+        
+        /* Navbar Styles */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            position: relative;
+        }
+        
+        .logo a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            position: relative;
+            margin: 0 15px;
+        }
+        
+        .nav-links a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: color 0.3s;
+        }
+        
+        .nav-links a:hover {
+            color: #ddd;
+        }
+        
+        .dropdown, .sub-dropdown {
+            position: absolute;
+            background: rgba(0, 0, 0, 0.9);
+            width: 200px;
+            top: 100%;
+            left: 0;
+            padding: 10px;
+            border-radius: 5px;
+            display: none;
+            z-index: 1000;
+        }
+        
+        .sub-dropdown {
+            left: 100%;
+            top: 0;
+        }
+        
+        .has-dropdown:hover > .dropdown,
+        .has-sub-dropdown:hover > .sub-dropdown {
+            display: block;
+        }
+        
+        .dropdown li, .sub-dropdown li {
+            margin: 10px 0;
+        }
+        
+        .right-section {
+            display: flex;
+            align-items: center;
+        }
+        
+        .icon {
+            color: #fff;
+            font-size: 1.2rem;
+            margin-left: 20px;
+            transition: color 0.3s;
+        }
+        
+        .icon:hover {
+            color: #ddd;
+        }
+        /* End Navbar Styles */
+        
+        .page-title {
+            text-align: center;
+            padding: 100px 0 40px;
+        }
+        
+        .page-title h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .category-intro {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 50px;
+            padding-top: 60px;
+        }
+        
+        .category-intro h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+        
+        .category-intro p {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: #555;
+        }
+        
+        .subcategories {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 50px;
+        }
+        
+        .subcategory-btn {
+            display: inline-block;
+            background: #000;
+            color: #fff;
+            padding: 12px 25px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .subcategory-btn:hover {
+            background: #333;
+            transform: translateY(-3px);
+        }
+        
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-bottom: 80px;
+        }
+        
+        .product-card {
+            background: #fff;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .product-image {
+            height: 250px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .product-card:hover .product-image img {
+            transform: scale(1.05);
+        }
+        
+        .product-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .product-card:hover .product-overlay {
+            opacity: 1;
+        }
+        
+        .quick-view {
+            background: #fff;
+            color: #000;
+            padding: 10px 20px;
+            border-radius: 30px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .quick-view:hover {
+            background: #000;
+            color: #fff;
+        }
+        
+        .product-content {
+            padding: 20px;
+        }
+        
+        .product-content h3 {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+        }
+        
+        .product-content p {
+            color: #666;
+            margin-bottom: 15px;
+            font-size: 0.9rem;
+            height: 40px;
+            overflow: hidden;
+        }
+        
+        .product-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 15px;
+        }
+        
+        .price {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #000;
+        }
+        
+        .cart-btn {
+            background: #000;
+            color: #fff;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: background 0.3s ease;
+        }
+        
+        .cart-btn:hover {
+            background: #333;
+        }
+        
+        @media (max-width: 992px) {
+            .products-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .subcategories {
+                flex-wrap: wrap;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header-section">
+        <!-- Navbar -->
+        <nav class="navbar">
+            <div class="logo">
+                <a href="index.html">Guitar Shop</a>
+            </div>
+            
+            <ul class="nav-links">
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li class="has-dropdown">
+                    <a href="product.html">Products</a>
+                    <ul class="dropdown">
+                        <li><a href="acoustic.html">Acoustic</a></li>
+                        <li class="has-sub-dropdown">
+                            <a href="electric.html">Electric</a>
+                            <ul class="sub-dropdown">
+                                <li><a href="prs.html">PRS</a></li>
+                                <li><a href="gibson.html">Gibson</a></li>
+                                <li><a href="strandberg.html">Strandberg</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+            
+            <div class="right-section">
+                <a href="login.html" class="icon"><i class="fas fa-user"></i></a>
+            </div>
+        </nav>
+        
+        <div class="page-title">
+            <h1>ELECTRIC GUITARS</h1>
+            <p>Performance instruments for the modern guitarist</p>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="category-intro">
+            <h2>Electric Collection</h2>
+            <p>From classic designs to modern innovations, our electric guitars deliver exceptional playability, versatility, and tone. Browse by brand to discover your perfect instrument.</p>
+        </div>
+        
+        <div class="subcategories">
+            <a href="prs.html" class="subcategory-btn">PRS</a>
+            <a href="gibson.html" class="subcategory-btn">Gibson</a>
+            <a href="strandberg.html" class="subcategory-btn">Strandberg</a>
+        </div>
+        
+        <div class="products-grid">
+            <!-- PRS Guitars -->
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="images/Electric_images/Prs/prs_custom_24.jpeg" alt="PRS Custom 24">
+                    <div class="product-overlay">
+                        <a href="#" class="quick-view">Quick View</a>
+                    </div>
+                </div>
+                <div class="product-content">
+                    <h3>PRS Custom 24</h3>
+                    <p>Versatile guitar with outstanding playability and tone</p>
+                    <div class="product-meta">
+                        <div class="price">$3,499.00</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Gibson Guitars -->
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="images/Electric_images/Gibson/Gibson SG.jpeg" alt="Gibson SG">
+                    <div class="product-overlay">
+                        <a href="#" class="quick-view">Quick View</a>
+                    </div>
+                </div>
+                <div class="product-content">
+                    <h3>Gibson SG Standard</h3>
+                    <p>Iconic double-cutaway with powerful, warm tone</p>
+                    <div class="product-meta">
+                        <div class="price">$1,799.00</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Strandberg Guitars -->
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="images/Electric_images/Standberg/standberg_wodenedition.jpeg" alt="Strandberg Boden">
+                    <div class="product-overlay">
+                        <a href="#" class="quick-view">Quick View</a>
+                    </div>
+                </div>
+                <div class="product-content">
+                    <h3>Strandberg Boden</h3>
+                    <p>Ergonomic headless design with exceptional comfort</p>
+                    <div class="product-meta">
+                        <div class="price">$2,395.00</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="images/Electric_images/Gibson/gibson_black.jpeg" alt="Gibson Les Paul">
+                    <div class="product-overlay">
+                        <a href="#" class="quick-view">Quick View</a>
+                    </div>
+                </div>
+                <div class="product-content">
+                    <h3>Gibson Les Paul Standard</h3>
+                    <p>Legendary solid-body with rich, sustaining tone</p>
+                    <div class="product-meta">
+                        <div class="price">$2,499.00</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="images/Electric_images/Prs/Paul Reed Smith (PRS) Special Semi-Hollow - Fire Red Burst.jpeg" alt="PRS Semi-Hollow">
+                    <div class="product-overlay">
+                        <a href="#" class="quick-view">Quick View</a>
+                    </div>
+                </div>
+                <div class="product-content">
+                    <h3>PRS Special Semi-Hollow</h3>
+                    <p>Beautiful semi-hollow with versatile tones</p>
+                    <div class="product-meta">
+                        <div class="price">$3,850.00</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="images/Electric_images/Standberg/Strandberg Guitar #36 (Allan Holdsworth).jpeg" alt="Strandberg Holdsworth">
+                    <div class="product-overlay">
+                        <a href="#" class="quick-view">Quick View</a>
+                    </div>
+                </div>
+                <div class="product-content">
+                    <h3>Strandberg Holdsworth Edition</h3>
+                    <p>Innovative design for fusion and progressive players</p>
+                    <div class="product-meta">
+                        <div class="price">$2,795.00</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Include Footer -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            fetch('footer.html')
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.text();
+                })
+                .then(data => {
+                    document.body.insertAdjacentHTML('beforeend', data);
+                })
+                .catch(error => {
+                    console.error('Error loading footer:', error);
+                });
+        });
+    </script>
+</body>
+</html> 
