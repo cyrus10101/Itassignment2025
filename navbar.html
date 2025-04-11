@@ -1,0 +1,160 @@
+<!-- Navbar Component -->
+<nav class="navbar">
+    <div class="logo">
+        <a href="index.html">Guitar Shop</a>
+    </div>
+    
+    <ul class="nav-links">
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li class="has-dropdown">
+            <a href="product.html">Products</a>
+            <ul class="dropdown">
+                <li><a href="acoustic.html">Acoustic</a></li>
+                <li class="has-sub-dropdown">
+                    <a href="electric.html">Electric</a>
+                    <ul class="sub-dropdown">
+                        <li><a href="prs.html">PRS</a></li>
+                        <li><a href="gibson.html">Gibson</a></li>
+                        <li><a href="strandberg.html">Strandberg</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+    </ul>
+    
+    <div class="right-section">
+        <a href="login.html" class="icon"><i class="fas fa-user"></i></a>
+    </div>
+</nav>
+
+<!-- Navbar Styling -->
+<style>
+    .navbar {
+        padding: 1.5rem 3rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        position: relative;
+        background-color: transparent;
+        color: #fff;
+        z-index: 100;
+    }
+    
+    .navbar a {
+        color: #fff;
+        text-decoration: none;
+        transition: color 0.3s ease;
+    }
+    
+    .navbar a:hover {
+        color: #ccc;
+    }
+    
+    .logo {
+        font-size: 1.6rem;
+        font-weight: 700;
+        letter-spacing: 1px;
+    }
+    
+    .nav-links {
+        display: flex;
+        list-style: none;
+        gap: 3.5rem;
+    }
+    
+    .nav-links li {
+        position: relative;
+        font-weight: 500;
+    }
+    
+    .dropdown {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        background-color: #000;
+        min-width: 180px;
+        display: none;
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        z-index: 1;
+        border-radius: 4px;
+        margin-top: 10px;
+        padding: 8px 0;
+    }
+    
+    .dropdown li {
+        padding: 0.8rem 1.5rem;
+        width: 100%;
+        transition: background-color 0.2s ease;
+    }
+    
+    .dropdown li:hover {
+        background-color: #222;
+    }
+    
+    .sub-dropdown {
+        position: absolute;
+        left: 100%;
+        top: 0;
+        background-color: #000;
+        min-width: 180px;
+        display: none;
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        border-radius: 4px;
+        margin-left: 2px;
+        padding: 8px 0;
+    }
+    
+    .has-dropdown:hover > .dropdown {
+        display: block;
+    }
+    
+    .has-sub-dropdown:hover > .sub-dropdown {
+        display: block;
+    }
+    
+    .right-section {
+        display: flex;
+        align-items: center;
+        gap: 2rem;
+    }
+    
+    .icon {
+        font-size: 1.3rem;
+        padding: 8px;
+        border-radius: 50%;
+        transition: background-color 0.3s ease;
+    }
+    
+    .icon:hover {
+        background-color: rgba(255, 255, 255, 0.1);
+    }
+    
+    /* Responsive Navbar */
+    @media (max-width: 768px) {
+        .navbar {
+            padding: 1rem 1.5rem;
+            flex-direction: column;
+        }
+        
+        .nav-links {
+            flex-direction: column;
+            width: 100%;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .dropdown, .sub-dropdown {
+            position: static;
+            width: 100%;
+            margin-top: 0;
+            margin-left: 0;
+            box-shadow: none;
+            background-color: transparent;
+        }
+        
+        .right-section {
+            margin-top: 1rem;
+        }
+    }
+</style> 
